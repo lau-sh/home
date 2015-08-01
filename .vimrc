@@ -1,186 +1,212 @@
-set nocompatible
+"NeoBundle Scripts-----------------------------
+if 0 | endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off                  " required
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-let path='~/.vim/bundle'
+  " Required:
+  set runtimepath+=/home/elau/.vim/bundle/neobundle.vim/
+endif
 
-call vundle#begin(path)
+" Required:
+call neobundle#begin(expand('/home/elau/.vim/bundle'))
 
-  " let Vundle manage Vundle, required
-  Plugin 'gmarik/Vundle.vim'
-  Plugin 'Valloric/YouCompleteMe'
-  Plugin 'altercation/vim-colors-solarized'
-  Plugin 'bling/vim-airline'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'tpope/vim-fugitive'
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-  Bundle "MarcWeber/vim-addon-mw-utils"
-  Bundle "tomtom/tlib_vim"
-  Bundle 'Lokaltog/vim-easymotion'
-  Bundle 'bronson/vim-trailing-whitespace'
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'kien/rainbow_parentheses.vim'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'scrooloose/syntastic'
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimshell.vim'
 
-call vundle#end()
-  filetype plugin on
+" Additional plugins
+NeoBundle 'Valloric/YouCompleteMe'
 
-  autocmd VimEnter * RainbowParenthesesToggle
-  autocmd Syntax * RainbowParenthesesLoadRound
-  autocmd Syntax * RainbowParenthesesLoadSquare
-  autocmd Syntax * RainbowParenthesesLoadBraces
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'easymotion/vim-easymotion'
+NeoBundle 'junegunn/limelight.vim'
+NeoBundle 'luochen1990/rainbow'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'tmhedberg/matchit'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'vim-scripts/a.vim'
 
-set autochdir
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                    Theme                                    "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme solarized
+set background=dark
+set t_Co=256
+
+let g:solarized_termcolors=256
+let g:solarized_visibility="high"
+let g:solarized_contrast="high"
+let g:solarized_termtrans=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Settings                                  "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+
 set autoread
 set autowrite
 set backspace=indent,eol,start
-set cino=N-s,+0
+set cino=N-s,+0,(0,g0
 set clipboard+=unnamed
+set colorcolumn=80
+
 set display+=lastline
 set expandtab
-
-set guioptions-=m
-set guioptions-=T
-
 set foldenable
 set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldmethod=marker
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
-set history=50		" keep 50 lines of command line history
+
+set guifont=Monospace
+set guioptions-=m
+set guioptions-=T
+set history=30		" keep 50 lines of command line history
 set hlsearch
 set incsearch		" do incremental searching
+set infercase
+
 set laststatus=2
+set lazyredraw
 set matchtime=5
 set modeline
 set modelines=5
 set nolist
 set nrformats-=octal
 set number
+
 set pastetoggle=<F10>
 set relativenumber
 set ruler		" show the cursor position all the time
 set shiftround
-
 set showcmd		" display incomplete commands
 set showmatch
+set smartcase
+set smartindent
 set splitbelow
 set splitright
-set smartindent
+set shiftwidth=4
+
+set tabstop=4
+set t_ut=
+set ttyfast
 set vb t_vb=
 set wildmenu
 
-set shiftwidth=2
-set tabstop=2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               Global Variables                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:limelight_conceal_guifg='#171717'
+let g:limelight_conceal_ctermfg=238
+let g:limelight_paragraph_span=1
 
-if (has("unix"))
-  set tags+=tags,~/.vim/tags
-  let g:ycm_collect_identifiers_from_tags_files=1
-  let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-endif
+let g:rainbow_active=1
+let g:rainbow_conf = {
+\   'guifgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
+\   'ctermfgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set backup/swap directories
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if (has("unix"))
-  set backupdir=~/.vim/backup,.
-  set directory=~/.vim/swap,.
-endif
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM themes
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
-if (!has("gui_running"))
-  let g:solarized_termcolors=256
-  set t_Co=256
-endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Functions                                  "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RealignCode()
+    %!astyle
+    FixWhitespace
+endfunction
 
-set background=dark
-colorscheme solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Autocommands                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FocusLost * :set norelativenumber
+autocmd FocusGained * :set relativenumber
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Normal remaps
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Normal remaps                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Do not remap the following keys: c
+
 nnoremap <leader> <nop>
 nnoremap <leader>" ci"
 nnoremap <leader>' ci'
-nnoremap <leader>, ci<
-nnoremap <leader>. ci>
+nnoremap <leader>( ci(
+nnoremap <leader>) ca)
+nnoremap <leader>- <Esc>:center<CR>0
 nnoremap <leader>/ ms/
 nnoremap <leader>0 ci)
-nnoremap <leader>9 ci(
+nnoremap <leader>< ci<
+nnoremap <leader>= <Esc>:call RealignCode()<CR>
+nnoremap <leader>> ca>
+nnoremap <leader>? ms?
 nnoremap <leader>? ms?
 nnoremap <leader>[ ci[
-nnoremap <leader>] ci]
-nnoremap <leader>c d/[A-Z-_]<CR>:nohlsearch<CR>i
-nnoremap <leader>d :%d<CR>
+nnoremap <leader>[ ci[
+nnoremap <leader>] ca]
+nnoremap <leader>] ci{
+nnoremap <leader>a <Esc>:A<CR>
 nnoremap <leader>d d/[A-Z-_]<CR>:nohlsearch<CR>
-nnoremap <leader>f cf<Space>
-nnoremap <leader>j 10j
-nnoremap <leader>k 10k
-nnoremap <leader>p viw"0p
-nnoremap <leader>t ct<Space>
-nnoremap <leader>w :set wrap!<CR>
-nnoremap <leader>y :%y<CR>
-nnoremap <leader>y yiw
-nnoremap <leader>z <Esc>:call FlipAutoclose()<CR>
+nnoremap <leader>e <Esc>:NERDTree<CR>
+nnoremap <leader>h <Esc>:nohlsearch<CR>
+nnoremap <leader>l <Esc>:Limelight!!<CR>
+nnoremap <leader>m <Esc>:mksession!<CR>
+nnoremap <leader>n <Esc>:tabnew<CR>
+nnoremap <leader>p <Esc>:set paste!<CR>
+nnoremap <leader>q <Esc>:bdelete<CR>
+nnoremap <leader>t <Esc>:tabedit %<CR>
+nnoremap <leader>w <Esc>:set wrap!<CR>
 nnoremap <leader>{ ci{
-nnoremap <leader>} ci}
-nnoremap <leader>= <Esc>:call RealignCode()<CR>
-nnoremap <silent> <leader>l :nohlsearch<CR>
+nnoremap <leader>} ca}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Command remaps
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cmap w!! w !sudo tee > /dev/null %
-autocmd CursorHold * checktime
-autocmd FileType sh :inoremap { {}<Esc>:call BC_AddChar("}")<CR>i
-autocmd FileType cmake :inoremap { {}<Esc>:call BC_AddChar("}")<CR>i
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+nnoremap }c <Esc>:cnext<CR>
+nnoremap }t <Esc>:tabnext<CR>
+nnoremap {c <Esc>:cprevious<CR>
+nnoremap {t <Esc>:tabprevious<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! FlipAutoclose()
-  if exists("b:ac")
-    unlet b:ac
-    iunmap (
-    iunmap [
-    iunmap "
-    iunmap {
-    iunmap <leader>j
-  else
-    let b:ac = 1
-    inoremap ( ()<Esc>:call BC_AddChar(")")<CR>i
-    inoremap [ []<Esc>:call BC_AddChar("]")<CR>i
-    inoremap " ""<Esc>:call BC_AddChar("\"")<CR>i
-    inoremap { {}<Esc>:call BC_AddChar("}")<CR>i
-    inoremap <leader>j <Esc>:call search(BC_GetChar(), "W")<CR>a
-  endif
-endfunction
-
-function! BC_AddChar(schar)
-  if exists("b:robstack")
-    let b:robstack = b:robstack . a:schar
-  else
-    let b:robstack = a:schar
-  endif
-endfunction
-
-function! BC_GetChar()
-  let l:char = b:robstack[strlen(b:robstack)-1]
-  let b:robstack = strpart(b:robstack, 0, strlen(b:robstack)-1)
-  return l:char
-endfunction
-
-function! RealignCode()
-  %!astyle
-  FixWhitespace
-endfunction
+" Blocking out the evil keys
+noremap! <Up> <NOP>
+noremap! <Down> <NOP>
+noremap! <Left> <NOP>
+noremap! <Right> <NOP>

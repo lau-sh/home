@@ -7,6 +7,8 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+set -o vi
+source .bash_aliases
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -76,8 +78,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -112,4 +114,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-export UBUNTU14=1
+
+export EDITOR='vim'
+export MANPAGER='less'
+export PAGER='less'
+export TERM='xterm-256color'
+
+if [[ $TMUX ]]; then source ~/.tmux-git/tmux-git.sh; fi
