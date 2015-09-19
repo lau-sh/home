@@ -1,4 +1,6 @@
-"NeoBundle Scripts-----------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             NeoBundle Scripts                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if 0 | endif
 
 if has('vim_starting')
@@ -66,6 +68,8 @@ let g:solarized_termtrans=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
+let $BASH_ENV="~/.bash_aliases"
+
 set autoread
 set autowrite
 set backspace=indent,eol,start
@@ -83,9 +87,9 @@ set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 set guifont=Monospace
 set guioptions-=m
 set guioptions-=T
-set history=30		" keep 50 lines of command line history
+set history=50
 set hlsearch
-set incsearch		" do incremental searching
+set incsearch
 set infercase
 
 set laststatus=2
@@ -99,9 +103,9 @@ set number
 
 set pastetoggle=<F10>
 set relativenumber
-set ruler		" show the cursor position all the time
+set ruler
 set shiftround
-set showcmd		" display incomplete commands
+set showcmd
 set showmatch
 set smartcase
 set smartindent
@@ -110,6 +114,8 @@ set splitright
 set shiftwidth=4
 
 set tabstop=4
+set tags=./tags, ~/.vim/etc/tags
+set textwidth=0
 set t_ut=
 set ttyfast
 set vb t_vb=
@@ -118,6 +124,8 @@ set wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Global Variables                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyMotion_do_mapping = 1
+
 let g:limelight_conceal_guifg='#171717'
 let g:limelight_conceal_ctermfg=238
 let g:limelight_paragraph_span=1
@@ -144,8 +152,14 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
+set statusline+=%1*\ %n\ %*
+set statusline+=%4*\ %<%F%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Functions                                  "
@@ -154,7 +168,6 @@ function! RealignCode()
     %!astyle
     FixWhitespace
 endfunction
-<<<<<<< HEAD
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Autocommands                                "
@@ -164,57 +177,72 @@ autocmd FocusGained * :set relativenumber
 
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
-=======
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Autocommands                                "
+"                               Command remaps                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FocusLost * :set norelativenumber
-autocmd FocusGained * :set relativenumber
-
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+cmap w!! w !sudo tee > /dev/null %
+cmap Q<CR> q<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Normal remaps                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Do not remap the following keys: c
->>>>>>> c6225166a07674a7c28643ba29b1cd7b1aa607df
 
-nnoremap <leader> <nop>
-nnoremap <leader>" ci"
-nnoremap <leader>' ci'
-nnoremap <leader>( ci(
-nnoremap <leader>) ca)
-nnoremap <leader>- <Esc>:center<CR>0
-nnoremap <leader>/ ms/
-nnoremap <leader>0 ci)
-nnoremap <leader>< ci<
-nnoremap <leader>= <Esc>:call RealignCode()<CR>
-nnoremap <leader>> ca>
-nnoremap <leader>? ms?
-nnoremap <leader>[ ci[
-nnoremap <leader>[ ci[
-nnoremap <leader>] ca]
-nnoremap <leader>] ci{
-nnoremap <leader>a <Esc>:A<CR>
-nnoremap <leader>d d/[A-Z-_]<CR>:nohlsearch<CR>
-nnoremap <leader>e <Esc>:NERDTree<CR>
-nnoremap <leader>h <Esc>:nohlsearch<CR>
-nnoremap <leader>l <Esc>:Limelight!!<CR>
-nnoremap <leader>m <Esc>:mksession!<CR>
-nnoremap <leader>n <Esc>:tabnew<CR>
-nnoremap <leader>p <Esc>:set paste!<CR>
-nnoremap <leader>q <Esc>:bdelete<CR>
-nnoremap <leader>t <Esc>:tabedit %<CR>
-nnoremap <leader>w <Esc>:set wrap!<CR>
-nnoremap <leader>{ ci{
-nnoremap <leader>} ca}
+inoremap <Leader> <NOP>
+nnoremap <Leader> <NOP>
+nnoremap <Leader>- <Esc>:center<CR>0
+nnoremap <Leader>= <Esc>:call RealignCode()<CR>
+nnoremap <Leader>a <Esc>:A<CR>
+nnoremap <Leader>c <Esc>:set relativenumber! \| set nonumber!<CR>
+nnoremap <Leader>e <Esc>:NERDTree<CR>
+nnoremap <Leader>h <Esc>:nohlsearch<CR>
+nnoremap <Leader>l <Esc>:Limelight!!<CR>
+nnoremap <Leader>m <Esc>:mksession!<CR>
+nnoremap <Leader>n <Esc>:tabnew<CR>
+nnoremap <Leader>p <Esc>:set paste!<CR>
+nnoremap <Leader>q <Esc>:bdelete<CR>
+nnoremap <Leader>s <Esc>:SyntasticCheck<CR>
+nnoremap <Leader>t <Esc>:tabedit %<CR>
+nnoremap <Leader>w <Esc>:set wrap!<CR>
 
-nnoremap }c <Esc>:cnext<CR>
-nnoremap }t <Esc>:tabnext<CR>
-nnoremap {c <Esc>:cprevious<CR>
-nnoremap {t <Esc>:tabprevious<CR>
+nnoremap <Leader>gb <Esc>:Gblame<CR>
+nnoremap <Leader>gd <Esc>:Gdiff<CR>
+nnoremap <Leader>ge <Esc>:Gedit<CR>
+nnoremap <Leader>gs <Esc>:Gstatus<CR>
+
+nnoremap <Space> <NOP>
+nnoremap <Space>" ci"
+nnoremap <Space>' ci'
+nnoremap <Space>( ci(
+nnoremap <Space>) ci)
+nnoremap <Space>/ ms/
+nnoremap <Space>< ci<
+nnoremap <Space>> ci>
+nnoremap <Space>? ms?
+nnoremap <Space>[ ci[
+nnoremap <Space>] ci]
+nnoremap <Space>{ ci{
+nnoremap <Space>} ci}
+
+nnoremap <Space>c d/[A-Z-_]<CR>:nohlsearch<CR>i
+nnoremap <Space>d d/[A-Z-_]<CR>:nohlsearch<CR>
+
+nmap <Space> <Plug>(easymotion-prefix)
+nmap <Space>s <Plug>(easymotion-s)
+nmap <Space>f <Plug>(easymotion-f)
+nmap <Space>F <Plug>(easymotion-F)
+nmap <Space>w <Plug>(easymotion-w)
+nmap <Space>b <Plug>(easymotion-b)
+nmap <Space>e <Plug>(easymotion-e)
+
+nnoremap ]b <Esc>:bnext<CR>
+nnoremap [b <Esc>:bprevious<CR>
+nnoremap ]c <Esc>:cnext<CR>
+nnoremap [c <Esc>:cprevious<CR>
+
+nnoremap ]]t <Esc>:tabnext<CR>
+nnoremap [[t <Esc>:tabprevious<CR>
 
 " Blocking out the evil keys
 noremap! <Up> <NOP>

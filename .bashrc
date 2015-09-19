@@ -75,23 +75,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -113,9 +97,24 @@ if ! shopt -oq posix; then
   fi
 fi
 
-set -o vi
+# Custom additions
+# Bash functions
 
-export EDITOR='vim'
-export MANPAGER='less'
-export PAGER='less'
-export TERM='xterm-256color'
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
+set -o vi
+shopt -s expand_aliases
+stty -ixon
+
+export EDITOR="vim -X --noplugin"
+export GIT_EDITOR="$EDITOR"
+export MANPAGER=less
+export PAGER=less
+export TERM="xterm-256color"
+
+export DEFAULT_SESSION_NAME="$(basename $SHELL)"
+export DEFAULT_SESSION_COLOR="lightblue,bold"
+
+export PROMPT_COMMAND=PromptCommand
