@@ -101,7 +101,6 @@ set pastetoggle=<F10>
 set relativenumber
 set ruler		" show the cursor position all the time
 set shiftround
-
 set showcmd		" display incomplete commands
 set showmatch
 set smartcase
@@ -155,6 +154,17 @@ function! RealignCode()
     %!astyle
     FixWhitespace
 endfunction
+<<<<<<< HEAD
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Autocommands                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FocusLost * :set norelativenumber
+autocmd FocusGained * :set relativenumber
+
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+=======
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Autocommands                                "
@@ -165,9 +175,12 @@ autocmd FocusGained * :set relativenumber
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Normal remaps
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Normal remaps                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Do not remap the following keys: c
+>>>>>>> c6225166a07674a7c28643ba29b1cd7b1aa607df
+
 nnoremap <leader> <nop>
 nnoremap <leader>" ci"
 nnoremap <leader>' ci'
@@ -179,7 +192,6 @@ nnoremap <leader>0 ci)
 nnoremap <leader>< ci<
 nnoremap <leader>= <Esc>:call RealignCode()<CR>
 nnoremap <leader>> ca>
-nnoremap <leader>? ms?
 nnoremap <leader>? ms?
 nnoremap <leader>[ ci[
 nnoremap <leader>[ ci[
