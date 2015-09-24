@@ -114,7 +114,7 @@ set splitright
 set shiftwidth=4
 
 set tabstop=4
-set tags=./tags, ~/.vim/etc/tags
+set tags=./tags,~/.vim/etc/tags
 set textwidth=0
 set t_ut=
 set ttyfast
@@ -146,6 +146,8 @@ let g:rainbow_conf = {
 \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
 \       },
 \}
+
+let g:EclimCompletionMethod = 'omnifunc'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
