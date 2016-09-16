@@ -1,55 +1,44 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                             NeoBundle Scripts                               "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if 0 | endif
-
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=/home/elau/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-" Required:
-call neobundle#begin(expand('/home/elau/.vim/bundle'))
+set runtimepath^=$HOME/.vim/bundle/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin(expand('$HOME/.vim/bundle'))
 
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/vimproc.vim'
-NeoBundle 'Shougo/vimshell.vim'
+" Let dein manage dein
+call dein#add('Shougo/dein.vim')
 
-" Additional plugins
-NeoBundle 'Valloric/YouCompleteMe'
+" Add or remove your plugins here:
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
 
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'junegunn/limelight.vim'
-NeoBundle 'luochen1990/rainbow'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tmhedberg/matchit'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'vim-scripts/a.vim'
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+call dein#add('bronson/vim-trailing-whitespace')
+call dein#add('easymotion/vim-easymotion')
+call dein#add('luochen1990/rainbow')
+call dein#add('scrooloose/nerdtree')
+call dein#add('tmhedberg/matchit')
+call dein#add('tpope/vim-fugitive')
+call dein#add('vim-scripts/a.vim')
+call dein#add('powerline/fonts')
 
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
+" You can specify revision/branch/tag.
+call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
-" Required:
-call neobundle#end()
+call dein#end()
 
-" Required:
 filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Theme                                    "
@@ -63,12 +52,44 @@ let g:solarized_visibility="high"
 let g:solarized_contrast="high"
 let g:solarized_termtrans=1
 
+
+" Plugin vars
+let g:EasyMotion_do_mapping = 1
+
+"let g:airline_powerline_fonts = 1
+
+let g:limelight_conceal_guifg='#171717'
+let g:limelight_conceal_ctermfg=238
+let g:limelight_paragraph_span=1
+
+let g:rainbow_active=1
+let g:rainbow_conf = {
+\   'guifgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
+\   'ctermfgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Functions                                  "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RealignCode()
+    %!astyle
+    FixWhitespace
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Settings                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-
-let $BASH_ENV="~/.bash_aliases"
 
 set autoread
 set autowrite
@@ -84,11 +105,12 @@ set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldmethod=marker
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
-set guifont=Monospace
+set guifont=ter-powerline\ 13
 set guioptions-=m
 set guioptions-=T
 set history=50
 set hlsearch
+set ignorecase
 set incsearch
 set infercase
 
@@ -121,55 +143,6 @@ set ttyfast
 set vb t_vb=
 set wildmenu
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               Global Variables                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_do_mapping = 1
-
-let g:limelight_conceal_guifg='#171717'
-let g:limelight_conceal_ctermfg=238
-let g:limelight_paragraph_span=1
-
-let g:rainbow_active=1
-let g:rainbow_conf = {
-\   'guifgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
-\   'ctermfgs': ['blue', 'green', 'yellow', 'red', 'lightblue', 'lightgreen', 'lightyellow', 'lightred'],
-\   'operators': '_,_',
-\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\   'separately': {
-\       '*': {},
-\       },
-\       'vim': {
-\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-\       },
-\       'html': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\}
-
-let g:EclimCompletionMethod = 'omnifunc'
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-
-set statusline+=%1*\ %n\ %*
-set statusline+=%4*\ %<%F%*
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Functions                                  "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RealignCode()
-    %!astyle
-    FixWhitespace
-endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Autocommands                                "
@@ -191,20 +164,15 @@ cmap Q<CR> q<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Do not remap the following keys: c
 
-inoremap <Leader> <NOP>
+let mapleader = '\'
+
 nnoremap <Leader> <NOP>
 nnoremap <Leader>- <Esc>:center<CR>0
 nnoremap <Leader>= <Esc>:call RealignCode()<CR>
-nnoremap <Leader>a <Esc>:A<CR>
-nnoremap <Leader>c <Esc>:set relativenumber! \| set nonumber!<CR>
-nnoremap <Leader>e <Esc>:NERDTree<CR>
 nnoremap <Leader>h <Esc>:nohlsearch<CR>
-nnoremap <Leader>l <Esc>:Limelight!!<CR>
 nnoremap <Leader>m <Esc>:mksession!<CR>
 nnoremap <Leader>n <Esc>:tabnew<CR>
-nnoremap <Leader>p <Esc>:set paste!<CR>
 nnoremap <Leader>q <Esc>:bdelete<CR>
-nnoremap <Leader>s <Esc>:SyntasticCheck<CR>
 nnoremap <Leader>t <Esc>:tabedit %<CR>
 nnoremap <Leader>w <Esc>:set wrap!<CR>
 
@@ -230,14 +198,6 @@ nnoremap <Space>} ci}
 nnoremap <Space>c d/[A-Z-_]<CR>:nohlsearch<CR>i
 nnoremap <Space>d d/[A-Z-_]<CR>:nohlsearch<CR>
 
-nmap <Space> <Plug>(easymotion-prefix)
-nmap <Space>s <Plug>(easymotion-s)
-nmap <Space>f <Plug>(easymotion-f)
-nmap <Space>F <Plug>(easymotion-F)
-nmap <Space>w <Plug>(easymotion-w)
-nmap <Space>b <Plug>(easymotion-b)
-nmap <Space>e <Plug>(easymotion-e)
-
 nnoremap ]b <Esc>:bnext<CR>
 nnoremap [b <Esc>:bprevious<CR>
 nnoremap ]c <Esc>:cnext<CR>
@@ -246,8 +206,10 @@ nnoremap [c <Esc>:cprevious<CR>
 nnoremap ]]t <Esc>:tabnext<CR>
 nnoremap [[t <Esc>:tabprevious<CR>
 
-" Blocking out the evil keys
-noremap! <Up> <NOP>
-noremap! <Down> <NOP>
-noremap! <Left> <NOP>
-noremap! <Right> <NOP>
+nmap <Space> <Plug>(easymotion-prefix)
+nmap <Space>s <Plug>(easymotion-s)
+nmap <Space>f <Plug>(easymotion-f)
+nmap <Space>F <Plug>(easymotion-F)
+nmap <Space>w <Plug>(easymotion-w)
+nmap <Space>b <Plug>(easymotion-b)
+nmap <Space>e <Plug>(easymotion-e)

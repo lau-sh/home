@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=2000
-HISTFILESIZE=2000
+HISTSIZE=100000
+HISTFILESIZE=100000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -104,11 +104,16 @@ fi
 # Custom additions
 # Bash functions
 
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
+if [ -f $HOME/.bash_functions ]; then
+    source $HOME/.bash_functions
+fi
+
+if [ -f $HOME/.aliases ]; then
+    source $HOME/.aliases
 fi
 
 set -o vi
+
 shopt -s expand_aliases
 stty -ixon
 

@@ -23,9 +23,13 @@
     st = status
     su = submodule update --init --recursive
 
-    sfa = submodule foreach git fetch
-    sca = submodule foreach git checkout
-    spa = submodule foreach git pull
+  sfa = submodule foreach git fetch
+  sca = submodule foreach git checkout
+  spa = submodule foreach git pull
+
+  sta = subtree add --squash
+  stp = subtree pull --squash
+  sts = subtree split --squash
 
 [merge]
     tool = vimdiff

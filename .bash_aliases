@@ -1,6 +1,8 @@
 # General aliases
 alias b-='banner --------'
+alias psef='ps -ef | grep'
 alias tmux-resize='tmux detach -a'
+alias findswp='find . -name "*.sw[l,m,n,o,p]"'
 
 # grep aliases
 alias grep='grep --color=auto -nI'
@@ -23,6 +25,7 @@ alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
 
+alias lg++=BuildLocal
 alias v=FastVim
 alias vr=FastROVim
 alias vs=SessionVim
