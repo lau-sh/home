@@ -13,21 +13,21 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/vimshell')
 
 call dein#add('altercation/vim-colors-solarized')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
 call dein#add('bronson/vim-trailing-whitespace')
+call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('easymotion/vim-easymotion')
+call dein#add('ervandew/supertab')
 call dein#add('luochen1990/rainbow')
+call dein#add('powerline/fonts')
 call dein#add('scrooloose/nerdtree')
 call dein#add('tmhedberg/matchit')
 call dein#add('tpope/vim-fugitive')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 call dein#add('vim-scripts/a.vim')
-call dein#add('powerline/fonts')
-
-" You can specify revision/branch/tag.
-call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
 call dein#end()
 
@@ -56,7 +56,7 @@ let g:solarized_termtrans=1
 " Plugin vars
 let g:EasyMotion_do_mapping = 1
 
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 let g:limelight_conceal_guifg='#171717'
 let g:limelight_conceal_ctermfg=238
@@ -105,7 +105,7 @@ set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldmethod=marker
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
-set guifont=ter-powerline\ 13
+set guifont=ter-powerline-x20n\ Medium\ 20
 set guioptions-=m
 set guioptions-=T
 set history=50
