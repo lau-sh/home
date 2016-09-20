@@ -81,15 +81,6 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -101,11 +92,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Custom additions
-# Bash functions
+# Bash aliases and functions
 
-if [ -f $HOME/.bash_functions ]; then
-    source $HOME/.bash_functions
+if [ -f $HOME/.functions ]; then
+    source $HOME/.functions
 fi
 
 if [ -f $HOME/.aliases ]; then
@@ -113,7 +103,6 @@ if [ -f $HOME/.aliases ]; then
 fi
 
 set -o vi
-
 shopt -s expand_aliases
 stty -ixon
 
@@ -121,9 +110,9 @@ export EDITOR="vim -X --noplugin"
 export GIT_EDITOR="$EDITOR"
 export MANPAGER=less
 export PAGER=less
+export PROMPT_COMMAND=PromptCommand
 export TERM="xterm-256color"
 
 export DEFAULT_SESSION_NAME="$(basename $SHELL)"
 export DEFAULT_SESSION_COLOR="lightblue,bold"
 
-export PROMPT_COMMAND=PromptCommand
