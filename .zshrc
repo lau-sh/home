@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/elau/.oh-my-zsh
+export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -51,6 +51,24 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(thefuck)
+plugins=(thefuck)
 
 source $ZSH/oh-my-zsh.sh
+source /etc/zsh_command_not_found
+
+set -o vi
+
+function PromptCommand() {
+    return
+}
+
+export EDITOR="vim -X --noplugin"
+export GIT_EDITOR="$EDITOR"
+export MANPAGER=less
+export PAGER=less
+export PROMPT_COMMAND=PromptCommand
+export TERM="xterm-256color"
+export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+
+export DEFAULT_SESSION_NAME="$(basename $SHELL)"
+export DEFAULT_SESSION_COLOR="lightblue,bold"

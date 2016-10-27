@@ -28,6 +28,8 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('vim-scripts/a.vim')
+call dein#add('mileszs/ack.vim')
+call dein#add('wincent/command-t')
 
 call dein#end()
 
@@ -57,6 +59,10 @@ let g:solarized_termtrans=1
 let g:EasyMotion_do_mapping = 1
 
 let g:airline_powerline_fonts = 1
+
+let g:SuperTabDefaultCompletionType = 'context'
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
 
 let g:limelight_conceal_guifg='#171717'
 let g:limelight_conceal_ctermfg=238
@@ -95,7 +101,7 @@ set autoread
 set autowrite
 set backspace=indent,eol,start
 set cino=N-s,+0,(0,g0
-set clipboard+=unnamed
+set clipboard=exclude:.*
 set colorcolumn=80
 
 set display+=lastline
@@ -119,6 +125,7 @@ set lazyredraw
 set matchtime=5
 set modeline
 set modelines=5
+set mouse=a
 set nolist
 set nrformats-=octal
 set number
@@ -136,7 +143,7 @@ set splitright
 set shiftwidth=4
 
 set tabstop=4
-set tags=./tags,~/.vim/etc/tags
+set tags=./tags,tags;
 set textwidth=0
 set t_ut=
 set ttyfast
@@ -173,7 +180,7 @@ nnoremap <Leader>h <Esc>:nohlsearch<CR>
 nnoremap <Leader>m <Esc>:mksession!<CR>
 nnoremap <Leader>n <Esc>:tabnew<CR>
 nnoremap <Leader>q <Esc>:bdelete<CR>
-nnoremap <Leader>t <Esc>:tabedit %<CR>
+"nnoremap <Leader>t <Esc>:tabedit %<CR>
 nnoremap <Leader>w <Esc>:set wrap!<CR>
 
 nnoremap <Leader>gb <Esc>:Gblame<CR>

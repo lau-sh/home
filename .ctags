@@ -1,0 +1,15 @@
+--recurse=yes
+--tag-relative=yes
+--exclude=.git
+--exclude=.svn
+--exclude=.hg
+--exclude=\*.sw?
+--exclude=\*.bak
+--exclude=\*.tar.\*
+--exclude=tags
+--exclude=cscope.\*
+--c++-kinds=+p
+--fields=+iaS
+--extra=+q
+--languages=c++
+--langmap=c++:+.inl

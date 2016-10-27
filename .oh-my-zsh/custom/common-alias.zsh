@@ -14,28 +14,27 @@ alias -s hpp=vim
 alias -s htm=vim
 alias -s html=vim
 alias -s js=vim
-alias -s py=vim
+alias -s txt=vim
 alias -s xml=vim
 
 alias -s pdf=evince
 
 # Global aliases
-alias -g G='| grep'
+alias -g G='| grep -i'
 alias -g L='| less'
 alias -g V='| grep -v'
 
 # General aliases
 alias b-='banner --------'
+alias findswp='find . -name "*.sw[l,m,n,o,p]"'
+alias neww='tmux new-window'
 alias psef='ps -ef | grep'
 alias tmux-reload='tmux detach -a'
-alias neww='tmux new-window'
-alias findswp='find . -name "*.sw[l,m,n,o,p]"'
 
 # grep aliases
 alias grep='grep --color=auto -nI'
 alias fgrep='fgrep --color=auto -nI'
 alias egrep='egrep --color=auto -nI'
-alias rgrep='grep --color=auto -inI'
 alias rgrep='grep --color=auto -nIR'
 
 alias greph='grep --color=auto -IR --include=*.{h,hh,hpp}'

@@ -1,6 +1,7 @@
 [user]
-	name = Eric Lau
-	email = elau89@gmail.com
+    name = Eric Lau
+#   email = eric@lakehillgroup.com
+    email = elau89@gmail.com
 
 [core]
     editor = vim -X --noplugin
@@ -17,19 +18,19 @@
     gs = rev-parse --short HEAD
     ll = log --decorate --color --all --graph --pretty
     ri = rebase -i
-    sl = log --decorate --color --all --graph --pretty=format:\"\
-        %C(red)%h %C(white)%s %C(yellow)%d %C(green)%ad %C(blue)<%an>%C(reset)\
-        \" --date=short
+    sl = log --decorate --color --all --graph --pretty=format:\"%C(red)%h \
+         %C(white)%s %C(yellow)%d %C(green)%ad %C(blue)<%an>%C(reset)\
+         \" --date=short
     st = status
     su = submodule update --init --recursive
 
-  sfa = submodule foreach git fetch
-  sca = submodule foreach git checkout
-  spa = submodule foreach git pull
+    sfa = submodule foreach git fetch
+    sca = submodule foreach git checkout
+    spa = submodule foreach git pull
 
-  sta = subtree add --squash
-  stp = subtree pull --squash
-  sts = subtree split --squash
+    sta = subtree add --squash
+    stp = subtree pull --squash
+    sts = subtree split --squash
 
 [merge]
     tool = vimdiff
