@@ -111,7 +111,7 @@ set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldmethod=marker
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
-set guifont=ter-powerline-x20n\ Medium\ 20
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
 set guioptions-=m
 set guioptions-=T
 set history=50

@@ -43,3 +43,6 @@ alias greps='grep --color=auto -IR --include=*.{h,hh,hpp,c,cc,cpp,cxx}'
 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
+
+alias la='ls -A'
+alias ll='ls -l'
