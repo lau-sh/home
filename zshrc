@@ -54,7 +54,10 @@ ZSH_THEME="robbyrussell"
 plugins=(thefuck)
 
 source $ZSH/oh-my-zsh.sh
-source /etc/zsh_command_not_found
+
+if [ -f /etc/zsh_command_not_found ]; then
+    source /etc/zsh_command_not_found
+fi
 
 set -o vi
 
