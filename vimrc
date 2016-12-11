@@ -27,7 +27,6 @@ call dein#add('tmhedberg/matchit')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
-call dein#add('vim-scripts/a.vim')
 call dein#add('mileszs/ack.vim')
 call dein#add('wincent/command-t')
 
