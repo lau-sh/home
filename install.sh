@@ -7,7 +7,7 @@ CONVERSION_LIST=(
 ctags
 gitconfig
 gitignore
-oh-my-zsh
+custom
 profile
 tmux.conf
 vimrc
