@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DISTRO=$(grep ^ID= /etc/*-release)
+DISTRO=${DISTRO//\"/}
 DISTRO=${DISTRO##*=}
 
 CONVERSION_LIST=(
@@ -23,9 +24,17 @@ vim
 )
 
 case "$DISTRO" in
+    ubuntu)
+        INSTALL_CMD="sudo apt install -y"
+        ;;
     fedora)
-        INSTALL_CMD="sudo dnf install"
+        INSTALL_CMD="sudo dnf install -y"
+
+        echo "Installing chsh for oh-my-zsh..."
         INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
+        ;;
+    centos)
+        INSTALL_CMD="sudo yum install -y"
         ;;
     *)
         echo "Unsupported distribution.  Please fix before using"
@@ -85,3 +94,4 @@ then
 fi
 
 echo "Installation complete!"
+exit 0
