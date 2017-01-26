@@ -18,23 +18,35 @@ zshrc
 INSTALLATION_LIST=(
 curl
 git
-zsh
+python
+python3
 tmux
 vim
+zsh
+)
+
+POST_INSTALLATION_LIST=(
+python-pip
 )
 
 case "$DISTRO" in
     ubuntu)
         INSTALL_CMD="sudo apt install -y"
+
+        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
         ;;
     fedora)
         INSTALL_CMD="sudo dnf install -y"
 
         echo "Installing chsh for oh-my-zsh..."
         INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
+        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
         ;;
     centos)
         INSTALL_CMD="sudo yum install -y"
+
+        INSTALLATION_LIST="$INSTALLATION_LIST epel-release"
+        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
         ;;
     *)
         echo "Unsupported distribution.  Please fix before using"
@@ -45,6 +57,7 @@ echo "Found distribution: $DISTRO"
 echo "Using \"$INSTALL_CMD\" as install command..."
 
 $INSTALL_CMD ${INSTALLATION_LIST[*]}
+$INSTALL_CMD ${POST_INSTALLATION_LIST[*]}
 
 if [ $? -ne 0 ]
 then

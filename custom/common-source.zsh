@@ -1,3 +1,3 @@
 stty -ixon
 
-eval "$(thefuck --alias f)"
+#eval "$(thefuck --alias f)"
