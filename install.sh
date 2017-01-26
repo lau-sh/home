@@ -44,7 +44,7 @@ esac
 echo "Found distribution: $DISTRO"
 echo "Using \"$INSTALL_CMD\" as install command..."
 
-$INSTALL_CMD $INSTALLATION_LIST[*]
+$INSTALL_CMD ${INSTALLATION_LIST[*]}
 
 if [ $? -ne 0 ]
 then
