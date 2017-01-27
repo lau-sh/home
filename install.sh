@@ -1,8 +1,14 @@
 #!/bin/bash
 
-DISTRO=$(grep ^ID= /etc/*-release)
+DISTRO=$(sudo grep ^ID= /etc/*-release)
 DISTRO=${DISTRO//\"/}
 DISTRO=${DISTRO##*=}
+
+if [ $? -ne 0 ]
+then
+    echo "sudo failed.  Please try try again"
+    exit 1
+fi
 
 CONVERSION_LIST=(
 ctags
@@ -29,28 +35,65 @@ POST_INSTALLATION_LIST=(
 python-pip
 )
 
+function SetupFedora() {
+    INSTALL_CMD="sudo dnf install -y"
+
+    echo "Installing chsh for oh-my-zsh..."
+    INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
+    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+}
+
+function SetupCentOS() {
+    INSTALL_CMD="sudo yum install -y"
+
+    INSTALLATION_LIST="$INSTALLATION_LIST epel-release"
+    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+}
+
+function SetupUbuntu() {
+    INSTALL_CMD="sudo apt install -y"
+
+    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
+}
+
+function AttemptLegacyInstall() {
+    typeset dist=$(cat /etc/*-release | cut -d ' ' -f1)
+
+    echo "WARNING: Attempting profile install for legacy distribution"
+
+    if [ $dist == "CentOS" ]; then
+        cat /etc/*-release | cut -d ' ' -f3 | grep '5.' > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Detected old distribution CentOS 5.*"
+
+            SetupCentOS
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+function moveToHome() {
+	cp -fr $1 $HOME/.$1
+}
+
 case "$DISTRO" in
     ubuntu)
-        INSTALL_CMD="sudo apt install -y"
-
-        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
+        SetupUbuntu
         ;;
     fedora)
-        INSTALL_CMD="sudo dnf install -y"
-
-        echo "Installing chsh for oh-my-zsh..."
-        INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
-        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+        SetupFedora
         ;;
     centos)
-        INSTALL_CMD="sudo yum install -y"
-
-        INSTALLATION_LIST="$INSTALLATION_LIST epel-release"
-        POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+        SetupCentOS
         ;;
     *)
-        echo "Unsupported distribution.  Please fix before using"
-        exit 1
+        AttemptLegacyInstall
+        if [ $? -ne 0 ]; then
+            echo "Unsupported distribution.  Please fix before using."
+            exit 1
+        fi
 esac
 
 echo "Found distribution: $DISTRO"
@@ -73,7 +116,11 @@ chmod +x dein_installer.sh
 mkdir -p $HOME/.vim/bundle
 sh dein_installer.sh $HOME/.vim/bundle
 
-if [ $? -ne 0 ]
+DEINEC=$?
+
+rm dein_installer.sh
+
+if [ $DEINEC -ne 0 ]
 then
     echo "Installing dein failed."
     exit 3
@@ -90,10 +137,6 @@ then
 fi
 
 echo "Installing user configuration files..."
-
-function moveToHome() {
-	cp -fr $1 $HOME/.$1
-}
 
 for file in "${CONVERSION_LIST[@]}"
 do
