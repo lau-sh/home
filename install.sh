@@ -14,7 +14,6 @@ CONVERSION_LIST=(
 ctags
 gitconfig
 gitignore
-custom
 profile
 tmux.conf
 vimrc
@@ -148,6 +147,8 @@ then
     echo "Moving configuration packages failed."
     exit 5
 fi
+
+cp -fr custom $HOME/.oh-my-zsh
 
 echo "Installation complete!"
 exit 0
