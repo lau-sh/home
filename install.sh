@@ -78,6 +78,9 @@ function moveToHome() {
 }
 
 case "$DISTRO" in
+    raspbian)
+        SetupUbuntu
+        ;;
     ubuntu)
         SetupUbuntu
         ;;
