@@ -35,7 +35,7 @@ python-pip
 )
 
 function SetupFedora() {
-    INSTALL_CMD="sudo dnf install -y"
+    INSTALL_CMD="sudo dnf install -y --best --allowerasing"
 
     echo "Installing chsh for oh-my-zsh..."
     INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
