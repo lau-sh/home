@@ -155,7 +155,21 @@ then
     exit 5
 fi
 
+sudo pip install pygments
+
+if [ $? -ne 0 ]
+then
+    echo "Pygments installation failed"
+    exit 6
+fi
+
 cp -fr custom $HOME/.oh-my-zsh
+
+if [ $? -ne 0 ]
+then
+    echo "Copying .oh-my-zsh failed"
+    exit 7
+fi
 
 echo "Installation complete!"
 exit 0
