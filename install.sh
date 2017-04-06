@@ -14,6 +14,7 @@ CONVERSION_LIST=(
 ctags
 gitconfig
 gitignore
+lessfilter
 profile
 tmux.conf
 vimrc
@@ -144,6 +145,9 @@ for file in "${CONVERSION_LIST[@]}"
 do
 	moveToHome $file
 done
+
+# .lessfilter needs to be executable
+chmod +x $HOME/.lessfilter
 
 if [ $? -ne 0 ]
 then

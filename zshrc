@@ -75,3 +75,5 @@ export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 export DEFAULT_SESSION_NAME="$(basename $SHELL)"
 export DEFAULT_SESSION_COLOR="lightblue,bold"
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
