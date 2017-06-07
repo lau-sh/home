@@ -2,7 +2,7 @@ function FastVim {
     vim -X --noplugin "$@"
 }
 
-function FastROVim {
+function ROVim {
     FastVim -R "$@"
 }
 

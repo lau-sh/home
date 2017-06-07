@@ -11,24 +11,16 @@ call dein#begin(expand('$HOME/.vim/bundle'))
 call dein#add('Shougo/dein.vim')
 
 " Add or remove your plugins here:
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('Shougo/vimshell')
-
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('ctrlpvim/ctrlp.vim')
-call dein#add('easymotion/vim-easymotion')
-call dein#add('ervandew/supertab')
 call dein#add('luochen1990/rainbow')
 call dein#add('powerline/fonts')
-call dein#add('scrooloose/nerdtree')
 call dein#add('tmhedberg/matchit')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('mileszs/ack.vim')
-call dein#add('wincent/command-t')
 
 call dein#end()
 
@@ -53,19 +45,11 @@ let g:solarized_visibility="high"
 let g:solarized_contrast="high"
 let g:solarized_termtrans=1
 
-
 " Plugin vars
-let g:EasyMotion_do_mapping = 1
-
 let g:airline_powerline_fonts = 1
 
-let g:SuperTabDefaultCompletionType = 'context'
 let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
-
-let g:limelight_conceal_guifg='#171717'
-let g:limelight_conceal_ctermfg=238
-let g:limelight_paragraph_span=1
 
 let g:rainbow_active=1
 let g:rainbow_conf = {
@@ -84,13 +68,6 @@ let g:rainbow_conf = {
 \       },
 \}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Functions                                  "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RealignCode()
-    %!astyle
-    FixWhitespace
-endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Settings                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,7 +107,6 @@ set nrformats-=octal
 set number
 
 set pastetoggle=<F10>
-set relativenumber
 set ruler
 set shiftround
 set showcmd
@@ -142,22 +118,12 @@ set splitright
 set shiftwidth=4
 
 set tabstop=4
-set tags=./tags,tags;
+set tags=./tags;/
 set textwidth=0
 set t_ut=
 set ttyfast
 set vb t_vb=
 set wildmenu
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                 Autocommands                                "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FocusLost * :set norelativenumber
-autocmd FocusGained * :set relativenumber
-
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Command remaps                                "
@@ -174,18 +140,7 @@ let mapleader = '\'
 
 nnoremap <Leader> <NOP>
 nnoremap <Leader>- <Esc>:center<CR>0
-nnoremap <Leader>= <Esc>:call RealignCode()<CR>
-nnoremap <Leader>h <Esc>:nohlsearch<CR>
-nnoremap <Leader>m <Esc>:mksession!<CR>
-nnoremap <Leader>n <Esc>:tabnew<CR>
-nnoremap <Leader>q <Esc>:bdelete<CR>
-"nnoremap <Leader>t <Esc>:tabedit %<CR>
 nnoremap <Leader>w <Esc>:set wrap!<CR>
-
-nnoremap <Leader>gb <Esc>:Gblame<CR>
-nnoremap <Leader>gd <Esc>:Gdiff<CR>
-nnoremap <Leader>ge <Esc>:Gedit<CR>
-nnoremap <Leader>gs <Esc>:Gstatus<CR>
 
 nnoremap <Space> <NOP>
 nnoremap <Space>" ci"
@@ -208,14 +163,5 @@ nnoremap ]b <Esc>:bnext<CR>
 nnoremap [b <Esc>:bprevious<CR>
 nnoremap ]c <Esc>:cnext<CR>
 nnoremap [c <Esc>:cprevious<CR>
-
-nnoremap ]]t <Esc>:tabnext<CR>
-nnoremap [[t <Esc>:tabprevious<CR>
-
-nmap <Space> <Plug>(easymotion-prefix)
-nmap <Space>s <Plug>(easymotion-s)
-nmap <Space>f <Plug>(easymotion-f)
-nmap <Space>F <Plug>(easymotion-F)
-nmap <Space>w <Plug>(easymotion-w)
-nmap <Space>b <Plug>(easymotion-b)
-nmap <Space>e <Plug>(easymotion-e)
+nnoremap ]t <Esc>:tagnext<CR>
+nnoremap [t <Esc>:tagprevious<CR>

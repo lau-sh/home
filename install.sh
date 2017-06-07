@@ -130,6 +130,7 @@ then
 fi
 
 echo "Install oh-my-zsh..."
+echo "Remember to hit CTRL-D when in zsh to finish the rest of the installation"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
