@@ -23,3 +23,4 @@ alias vdir='vdir --color=auto'
 
 alias la='ls -A'
 alias ll='ls -l'
+alias lla='ls -lA'

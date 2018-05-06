@@ -56,24 +56,6 @@ function SetupUbuntu() {
     POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
 }
 
-function AttemptLegacyInstall() {
-    typeset dist=$(cat /etc/*-release | cut -d ' ' -f1)
-
-    echo "WARNING: Attempting profile install for legacy distribution"
-
-    if [ $dist == "CentOS" ]; then
-        cat /etc/*-release | cut -d ' ' -f3 | grep '5.' > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-            echo "Detected old distribution CentOS 5.*"
-
-            SetupCentOS
-            return 0
-        fi
-    fi
-
-    return 1
-}
-
 function moveToHome() {
 	cp -fr $1 $HOME/.$1
 }
@@ -92,7 +74,6 @@ case "$DISTRO" in
         SetupCentOS
         ;;
     *)
-        AttemptLegacyInstall
         if [ $? -ne 0 ]; then
             echo "Unsupported distribution.  Please fix before using."
             exit 1
@@ -132,7 +113,7 @@ fi
 echo "Install oh-my-zsh..."
 echo "Remember to hit CTRL-D when in zsh to finish the rest of the installation"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+bash -c $(dirname "$BASH_SOURCE")/oh-my-zsh-install.sh
 
 if [ $? -ne 0 ]
 then
@@ -156,7 +137,7 @@ then
     exit 5
 fi
 
-sudo pip install pygments
+sudo -H pip install pygments
 
 if [ $? -ne 0 ]
 then

@@ -15,7 +15,6 @@ call dein#add('altercation/vim-colors-solarized')
 call dein#add('bronson/vim-trailing-whitespace')
 call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('luochen1990/rainbow')
-call dein#add('powerline/fonts')
 call dein#add('tmhedberg/matchit')
 call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
@@ -136,28 +135,9 @@ cmap Q<CR> q<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Do not remap the following keys: c
 
-let mapleader = '\'
-
-nnoremap <Leader> <NOP>
-nnoremap <Leader>- <Esc>:center<CR>0
-nnoremap <Leader>w <Esc>:set wrap!<CR>
-
 nnoremap <Space> <NOP>
-nnoremap <Space>" ci"
-nnoremap <Space>' ci'
-nnoremap <Space>( ci(
-nnoremap <Space>) ci)
 nnoremap <Space>/ ms/
-nnoremap <Space>< ci<
-nnoremap <Space>> ci>
 nnoremap <Space>? ms?
-nnoremap <Space>[ ci[
-nnoremap <Space>] ci]
-nnoremap <Space>{ ci{
-nnoremap <Space>} ci}
-
-nnoremap <Space>c d/[A-Z-_]<CR>:nohlsearch<CR>i
-nnoremap <Space>d d/[A-Z-_]<CR>:nohlsearch<CR>
 
 nnoremap ]b <Esc>:bnext<CR>
 nnoremap [b <Esc>:bprevious<CR>
