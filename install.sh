@@ -48,6 +48,10 @@ function SetupCentOS() {
 
     INSTALLATION_LIST="$INSTALLATION_LIST epel-release"
     POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+
+    apt-get install software-properties-common
+    apt-add-repository universe
+    apt-get update
 }
 
 function SetupUbuntu() {
