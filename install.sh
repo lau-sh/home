@@ -16,7 +16,6 @@ gitconfig
 gitignore
 lessfilter
 profile
-tmux.conf
 vimrc
 zshrc
 )
@@ -35,12 +34,18 @@ POST_INSTALLATION_LIST=(
 python-pip
 )
 
+function moveToHome() {
+    cp -fr $1 $HOME/.$1
+}
+
 function SetupFedora() {
     INSTALL_CMD="sudo dnf install -y --best --allowerasing"
 
     echo "Installing chsh for oh-my-zsh..."
     INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
     POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+
+    moveToHome tmux.conf
 }
 
 function SetupCentOS() {
@@ -52,16 +57,16 @@ function SetupCentOS() {
     apt-get install software-properties-common
     apt-add-repository universe
     apt-get update
+
+    sed -ie 's/mouse on/mouse-mode on/' tmux.conf
+    moveToHome tmux.conf
 }
 
 function SetupUbuntu() {
     INSTALL_CMD="sudo apt install -y"
 
     POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
-}
-
-function moveToHome() {
-	cp -fr $1 $HOME/.$1
+    moveToHome tmux.conf
 }
 
 case "$DISTRO" in
@@ -102,6 +107,7 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 chmod +x dein_installer.sh
 
 mkdir -p $HOME/.vim/bundle
+mkdir -p $HOME/.root/bin
 sh dein_installer.sh $HOME/.vim/bundle
 
 DEINEC=$?
@@ -129,7 +135,7 @@ echo "Installing user configuration files..."
 
 for file in "${CONVERSION_LIST[@]}"
 do
-	moveToHome $file
+    moveToHome $file
 done
 
 # .lessfilter needs to be executable
