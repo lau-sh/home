@@ -147,7 +147,7 @@ then
     exit 5
 fi
 
-sudo -H pip install pygments
+sudo -H pip install --user pygments
 
 if [ $? -ne 0 ]
 then
