@@ -1,5 +1,4 @@
 # Remove prepared aliases from lib
-unalias please
 unalias which-command
 
 # General aliases
