@@ -6,7 +6,6 @@ export LANG=en_US.UTF-8
 # Preferred editor for local and remote sessions
 export EDITOR='vim -X'
 export GIT_EDITOR="$EDITOR"
-export PROMPT_COMMAND=PromptCommand
 
 # ssh
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"

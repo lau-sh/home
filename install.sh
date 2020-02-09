@@ -129,7 +129,7 @@ then
     exit 5
 fi
 
-sudo -H python3 -m pip install --user pygments
+python3 -m pip install --user pygments
 
 if [ $? -ne 0 ]
 then
