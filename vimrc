@@ -96,7 +96,6 @@ set lazyredraw
 set matchtime=5
 set modeline
 set modelines=5
-set mouse=a
 set nolist
 set nrformats-=octal
 set number
