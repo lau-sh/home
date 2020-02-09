@@ -65,11 +65,13 @@ function PromptCommand() {
     return
 }
 
+# Uncomment to set up a default command
+# export PROMPT_COMMAND=PromptCommand
+
 export EDITOR="vim -X --noplugin"
 export GIT_EDITOR="$EDITOR"
 export MANPAGER=less
 export PAGER=less
-export PROMPT_COMMAND=PromptCommand
 export TERM="xterm-256color"
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 

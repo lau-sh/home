@@ -13,13 +13,9 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 call dein#add('altercation/vim-colors-solarized')
 call dein#add('bronson/vim-trailing-whitespace')
-call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('luochen1990/rainbow')
 call dein#add('tmhedberg/matchit')
-call dein#add('tpope/vim-fugitive')
 call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('mileszs/ack.vim')
 
 call dein#end()
 

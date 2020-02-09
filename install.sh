@@ -6,7 +6,7 @@ DISTRO=${DISTRO##*=}
 
 if [ $? -ne 0 ]
 then
-    echo "sudo failed.  Please try try again"
+    echo "sudo failed.  Please try again"
     exit 1
 fi
 
@@ -23,7 +23,6 @@ zshrc
 INSTALLATION_LIST=(
 curl
 git
-python
 python3
 tmux
 vim
@@ -31,7 +30,7 @@ zsh
 )
 
 POST_INSTALLATION_LIST=(
-python-pip
+python3-pip
 )
 
 function moveToHome() {
@@ -43,29 +42,15 @@ function SetupFedora() {
 
     echo "Installing chsh for oh-my-zsh..."
     INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
-    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
+    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST powerline-fonts the_silver_searcher"
 
-    moveToHome tmux.conf
-}
-
-function SetupCentOS() {
-    INSTALL_CMD="sudo yum install -y"
-
-    INSTALLATION_LIST="$INSTALLATION_LIST epel-release"
-    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST the_silver_searcher"
-
-    apt-get install software-properties-common
-    apt-add-repository universe
-    apt-get update
-
-    sed -ie 's/mouse on/mouse-mode on/' tmux.conf
     moveToHome tmux.conf
 }
 
 function SetupUbuntu() {
     INSTALL_CMD="sudo apt install -y"
 
-    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST silversearcher-ag"
+    POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST fonts-powerline silversearcher-ag"
     moveToHome tmux.conf
 }
 
@@ -78,9 +63,6 @@ case "$DISTRO" in
         ;;
     fedora)
         SetupFedora
-        ;;
-    centos)
-        SetupCentOS
         ;;
     *)
         if [ $? -ne 0 ]; then
@@ -107,7 +89,7 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 chmod +x dein_installer.sh
 
 mkdir -p $HOME/.vim/bundle
-mkdir -p $HOME/.root/bin
+mkdir -p $HOME/.local/bin
 sh dein_installer.sh $HOME/.vim/bundle
 
 DEINEC=$?
@@ -147,7 +129,7 @@ then
     exit 5
 fi
 
-sudo -H pip install --user pygments
+sudo -H python3 -m pip install --user pygments
 
 if [ $? -ne 0 ]
 then
