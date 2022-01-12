@@ -15,13 +15,13 @@ bashrc
 ctags
 gitconfig
 profile
-neovim
+vim
 vimrc
 )
 
 INSTALLATION_LIST=(
-banner
 curl
+figlet
 git
 tmux
 vim
