@@ -11,26 +11,23 @@ then
 fi
 
 CONVERSION_LIST=(
+bashrc
 ctags
 gitconfig
-gitignore
-lessfilter
 profile
+neovim
 vimrc
-zshrc
 )
 
 INSTALLATION_LIST=(
+banner
 curl
 git
-python3
 tmux
 vim
-zsh
 )
 
 POST_INSTALLATION_LIST=(
-python3-pip
 )
 
 function moveToHome() {
@@ -40,7 +37,6 @@ function moveToHome() {
 function SetupFedora() {
     INSTALL_CMD="sudo dnf install -y --best --allowerasing"
 
-    echo "Installing chsh for oh-my-zsh..."
     INSTALLATION_LIST="$INSTALLATION_LIST util-linux-user"
     POST_INSTALLATION_LIST="$POST_INSTALLATION_LIST powerline-fonts the_silver_searcher"
 
@@ -65,10 +61,8 @@ case "$DISTRO" in
         SetupFedora
         ;;
     *)
-        if [ $? -ne 0 ]; then
-            echo "Unsupported distribution.  Please fix before using."
-            exit 1
-        fi
+        echo "Unsupported distribution.  Please fix before using."
+        exit 1
 esac
 
 echo "Found distribution: $DISTRO"
@@ -83,35 +77,8 @@ then
     exit 2
 fi
 
-echo "Installing dein vim package manager..."
-
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > dein_installer.sh
-chmod +x dein_installer.sh
-
-mkdir -p $HOME/.vim/bundle
 mkdir -p $HOME/.local/bin
-sh dein_installer.sh $HOME/.vim/bundle
-
-DEINEC=$?
-
-rm dein_installer.sh
-
-if [ $DEINEC -ne 0 ]
-then
-    echo "Installing dein failed."
-    exit 3
-fi
-
-echo "Install oh-my-zsh..."
-echo "Remember to hit CTRL-D when in zsh to finish the rest of the installation"
-
-bash -c $(dirname "$BASH_SOURCE")/oh-my-zsh-install.sh
-
-if [ $? -ne 0 ]
-then
-    echo "Installing oh-my-zsh failed."
-    exit 4
-fi
+mkdir -p $HOME/.local/share
 
 echo "Installing user configuration files..."
 
@@ -120,29 +87,12 @@ do
     moveToHome $file
 done
 
-# .lessfilter needs to be executable
-chmod +x $HOME/.lessfilter
+cp -f gitignore.template $HOME/.local/share
 
 if [ $? -ne 0 ]
 then
     echo "Moving configuration packages failed."
-    exit 5
-fi
-
-python3 -m pip install --user pygments
-
-if [ $? -ne 0 ]
-then
-    echo "Pygments installation failed"
-    exit 6
-fi
-
-cp -fr custom $HOME/.oh-my-zsh
-
-if [ $? -ne 0 ]
-then
-    echo "Copying .oh-my-zsh failed"
-    exit 7
+    exit 3
 fi
 
 echo "Installation complete!"

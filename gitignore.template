@@ -1,0 +1,17 @@
+# Common generated files
+*.ERROR
+*.INFO
+*.WARNING
+*.log
+*.pyc
+*~
+.sw?
+core.*
+tags
+
+# Directories
+build/
+logs/
+mnt/
+out/
+venv/

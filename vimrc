@@ -1,33 +1,3 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-set runtimepath^=$HOME/.vim/bundle/repos/github.com/Shougo/dein.vim
-
-call dein#begin(expand('$HOME/.vim/bundle'))
-
-" Let dein manage dein
-call dein#add('Shougo/dein.vim')
-
-" Add or remove your plugins here:
-call dein#add('altercation/vim-colors-solarized')
-call dein#add('bronson/vim-trailing-whitespace')
-call dein#add('luochen1990/rainbow')
-call dein#add('tmhedberg/matchit')
-call dein#add('vim-airline/vim-airline')
-
-call dein#end()
-
-filetype plugin indent on
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                    Theme                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -42,9 +12,6 @@ let g:solarized_termtrans=1
 
 " Plugin vars
 let g:airline_powerline_fonts = 1
-
-let g:ackprg = 'ag --vimgrep --smart-case'
-cnoreabbrev ag Ack
 
 let g:rainbow_active=1
 let g:rainbow_conf = {
@@ -72,14 +39,13 @@ set autoread
 set autowrite
 set backspace=indent,eol,start
 set cino=N-s,+0,(0,g0
-set clipboard=exclude:.*
 set colorcolumn=80
 
 set display+=lastline
 set expandtab
 set foldenable
 set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-set foldmethod=marker
+set foldmethod=manual
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
 set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
@@ -120,6 +86,13 @@ set vb t_vb=
 set wildmenu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                File Settings                                "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType rst setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Command remaps                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cmap Q<CR> q<CR>
@@ -139,3 +112,5 @@ nnoremap ]c <Esc>:cnext<CR>
 nnoremap [c <Esc>:cprevious<CR>
 nnoremap ]t <Esc>:tagnext<CR>
 nnoremap [t <Esc>:tagprevious<CR>
+nnoremap ]w <Esc>:tabnext<CR>
+nnoremap [w <Esc>:tabprevious<CR>
